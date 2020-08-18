@@ -3,8 +3,8 @@ import { getRepository } from 'typeorm';
 import path from 'path';
 import fs from 'fs';
 
-import User from '../models/User';
-import uploadConfig from '../config/upload';
+import uploadConfig from '@config/upload';
+import User from '../infra/typeorm/entities/User';
 
 interface RequestDTO {
     user_id: string;
