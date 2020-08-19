@@ -22,14 +22,23 @@
         "prettier"
     ],
     "rules": {
+        "camelcase": "off",
+        "no-underscore-dangle": "off",
         "prettier/prettier": "error",
         "class-methods-use-this": "off",
         "@typescript-eslint/camelcase": "off",
-        "import/extensions": [
+        "@typescript-eslint/no-unused-vars": [ "error", {
+            "argsIgnorePattern": "_"
+        }],
+        "@typescript-eslint/naming-convention": [
             "error",
-            "ignorePackages",
             {
-              "ts": "never"
+              "selector": "interface",
+              "format": ["PascalCase"],
+              "custom": {
+                "regex": "^I[A-Z]",
+                "match": true
+              }
             }
           ]
     },

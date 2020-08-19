@@ -2,7 +2,7 @@ import {
     MigrationInterface,
     QueryRunner,
     Table,
-    TableForeignKey,
+    // TableForeignKey,
 } from 'typeorm';
 
 export default class CreateAppointments1593479179060
