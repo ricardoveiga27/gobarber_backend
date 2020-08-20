@@ -1,24 +1,25 @@
-/* eslint-disable camelcase */
-import { getRepository } from 'typeorm';
 import path from 'path';
 import fs from 'fs';
+import { injectable, inject } from 'tsyringe';
 
 import uploadConfig from '@config/upload';
 import User from '../infra/typeorm/entities/User';
+import IUsersRepository from '../repositories/IUsersRepository';
 
-interface RequestDTO {
+interface IRequest {
     user_id: string;
     avatarFilename: string;
 }
 
-class UpdateAvatarService {
-    public async execute({
-        user_id,
-        avatarFilename,
-    }: RequestDTO): Promise<User> {
-        const userRepository = getRepository(User);
+@injectable()
+class UpdateUserAvatarService {
+    constructor(
+        @inject('UsersRepository')
+        private usersRepository: IUsersRepository,
+    ) {}
 
-        const user = await userRepository.findOne(user_id);
+    public async execute({ user_id, avatarFilename }: IRequest): Promise<User> {
+        const user = await this.usersRepository.findById(user_id);
 
         if (!user) {
             throw new Error('only authenticated users can change avatar.');
@@ -41,10 +42,10 @@ class UpdateAvatarService {
 
         user.avatar = avatarFilename;
 
-        await userRepository.save(user);
+        await this.usersRepository.save(user);
 
         return user;
     }
 }
 
-export default UpdateAvatarService;
+export default UpdateUserAvatarService;

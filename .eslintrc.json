@@ -27,6 +27,7 @@
         "prettier/prettier": "error",
         "class-methods-use-this": "off",
         "@typescript-eslint/camelcase": "off",
+        "no-useless-constructor": "off",
         "@typescript-eslint/no-unused-vars": [ "error", {
             "argsIgnorePattern": "_"
         }],
@@ -40,7 +41,17 @@
                 "match": true
               }
             }
-          ]
+          ],
+          "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+              "js": "never",
+              "jsx": "never",
+              "ts": "never",
+              "tsx": "never"
+            }
+         ]
     },
     "settings": {
         "import/resolver": {
